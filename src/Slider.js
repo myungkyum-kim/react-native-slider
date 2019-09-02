@@ -100,15 +100,17 @@ export default class Slider extends PureComponent<Props, State> {
   _thumbSize: any
   _previousLeft: number
 
-  state = {
-    containerSize: { width: 0, height: 0 },
-    trackSize: { width: 0, height: 0 },
-    thumbSize: { width: 0, height: 0 },
-    allMeasured: false,
-    value: new Animated.Value(this.props.value),
-  };
+  constructor(props) {
+    super(props);
 
-  componentWillMount() {
+    this.state = {
+      containerSize: { width: 0, height: 0 },
+      trackSize: { width: 0, height: 0 },
+      thumbSize: { width: 0, height: 0 },
+      allMeasured: false,
+      value: new Animated.Value(props.value),
+    };
+
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: this._handleStartShouldSetPanResponder,
       onMoveShouldSetPanResponder: this._handleMoveShouldSetPanResponder,
@@ -120,14 +122,12 @@ export default class Slider extends PureComponent<Props, State> {
     });
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    const newValue = nextProps.value;
-
-    if (this.props.value !== newValue) {
+  componentDidUpdate({value}: Props) {
+    if (this.props.value !== value) {
       if (this.props.animateTransitions) {
-        this._setCurrentValueAnimated(newValue);
+        this._setCurrentValueAnimated(this.props.value);
       } else {
-        this._setCurrentValue(newValue);
+        this._setCurrentValue(this.props.value);
       }
     }
   }
