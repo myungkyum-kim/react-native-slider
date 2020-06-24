@@ -34,7 +34,8 @@ local.properties
 #
 node_modules/
 npm-debug.log
-lib
+# npm からではなく github から直接 yarn install してきて lib のコードを使用したいので lib も ignore せず git push する
+# lib
 
 # editor
 .vscode
