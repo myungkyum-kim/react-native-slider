@@ -100,7 +100,7 @@ export default class Slider extends PureComponent<Props, State> {
   _thumbSize: any
   _previousLeft: number
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
